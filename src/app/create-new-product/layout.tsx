@@ -1,6 +1,5 @@
 import type {Metadata} from 'next'
 import {Inter} from 'next/font/google'
-import './globals.css'
 import Header from "@/components/main/header";
 import Footer from "@/components/main/footer";
 
@@ -17,12 +16,8 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return (
-        <html lang="en">
-        <body className={`font-main text-sm text-right overflow-x-hidden ${inter.className}`}>
-        <Header/>
-        {children}
-        <Footer/>
-        </body>
-        </html>
+        <div className={inter.className}>
+            {children}
+        </div>
     )
 }
