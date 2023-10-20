@@ -1,4 +1,4 @@
-export interface DataProduct{
+export interface DataProductSearch{
     title : string,
     id:number,
     image : string,

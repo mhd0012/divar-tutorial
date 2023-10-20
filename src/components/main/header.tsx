@@ -1,26 +1,22 @@
 "use client"
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import axios from "axios";
 import itpro from '../../Hooks/itpro'
 import IconDivar from '../../images/divar.svg'
-import {DataProduct} from "@/DataTypes/SearchProduct";
 import {URL_GET_PRODUCT_LIST} from "../../urls/urls";
 import useSWR from "swr";
 import Link from "next/link";
 import ThumbnailImage from "@/Hooks/ThumbnailImage";
+import {DataProduct} from "@/DataTypes/ProductData";
 
 
 function Header() {
-    console.log(IconDivar)
     const [searchTerm, setSearchTerm] = useState("");
-    const [products, setProducts] = useState([]);
 
-    const {data, error} = useSWR(URL_GET_PRODUCT_LIST, async (url) => {
+    const {data}= useSWR(URL_GET_PRODUCT_LIST, async (url) => {
         const response = await axios.get(url)
-        setProducts(response.data)
         return response.data
     })
-    const productList: DataProduct[] = products
 
 
     const handleSearchChange = (e: any) => {
@@ -28,35 +24,32 @@ function Header() {
     };
 
 
-    const filteredProducts = productList.filter((product) =>
+    const filteredProducts = data?.filter((product:DataProduct) =>
         product.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
 
+
     return (
-        <div className="absolute w-full bg-zinc-100 p-3">
-            <header className='justify-between flex'>
-                <div className="logo">
+        <div className="w-full bg-zinc-100 p-2 fixed">
+            <header className='justify-center flex-row flex align-middle '>
+                <div className="logo basis-3/12 inline-block align-middle">
                     <img src={IconDivar.src} width='38px' alt=""/>
                 </div>
-                <nav>
+                <nav className='mt-2 basis-6/12 flex justify-center'>
                     <ul className='text-center flex flex-row '>
-                        <li><a href="#" className='mr-5'>آگهی‌ها</a>
-                            {/*<Icon>add_circle</Icon>*/}
-                            {/*<Icon className='material-icons'>add_circle</Icon>*/}
-                            {/*<Icon className='material-icons'>add_circle</Icon>*/}
-                        </li>
+                        <li><a href="#" className='mr-5'>آگهی‌ها</a></li>
                         <li><a href="/create-new-product" className='mr-5'>درج آگهی</a></li>
                         <li><a href="#" className='mr-5'>پشتیبانی</a></li>
                         <li><a href="#" className='mr-5'>ورود/ثبت‌نام</a></li>
                     </ul>
                 </nav>
-                <div className="search">
+                <div className="search basis-3/12">
                     <form action="">
                         <input type="text" placeholder="... جست و جو " name='search' className='p-2 align-middle' dir=''
                                value={searchTerm} onChange={handleSearchChange}></input>
                         <button type="submit"
-                                className='bg-red-700 ml-2  text-white p-2 inline-block align-middle rounded'>جستجو
+                                className='bg-red-700 ml-2 shadow-md shadow-red-700/50  text-white p-2 inline-block align-middle rounded'>جستجو
                         </button>
 
                         {/* color sky button whit dashed 👇 */}
@@ -70,11 +63,11 @@ function Header() {
 
             </header>
 
-            {searchTerm !== '' ? (
+            {searchTerm !== '' && (
                 <div style={{display: 'flex', justifyContent: "center"}}>
                     <div className="w-full" style={{position: "absolute"}}>
-                        <div className='flex flex-row justify-center' style={{height: '1400px'}}>
-                            {filteredProducts.splice(0, 5).map((product) => (
+                        <div className='flex flex-row justify-center bg-zinc-600/50' style={{height: '1400px'}}>
+                            {filteredProducts.splice(0, 5).map((product:DataProduct) => (
 
                                 <div className='basis-1/6' style={{padding: '5px'}}>
                                     <Link href={`/${product.id}`} onClick={() => {
@@ -107,8 +100,6 @@ function Header() {
 
                     </div>
                 </div>
-            ) : (
-                <div></div>
             )}
 
         </div>

@@ -1,10 +1,11 @@
 import React from "react";
+import {DataProduct} from "@/DataTypes/ProductData";
+import {URL_MAIM} from "@/urls/urls";
 
-// @ts-ignore
-const ThumbnailImage = ({product}) => {
+const ThumbnailImage = ({product}:{product:DataProduct}) => {
     return (
         <div className='thumbnail'>
-            <img src={product.image} className='border' alt={product.title}/>
+            <img src={URL_MAIM+product.image} className='border' alt={product.image}/>
         </div>
     )
 }

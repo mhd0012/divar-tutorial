@@ -78,7 +78,7 @@
 }
 
 .line-clamp-1 {
-
+    background: #002e4b;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
