@@ -10,11 +10,20 @@ import ListCategory from "@/components/categoryes/ListCategory";
 
 function Content() {
 
+    interface Data {
+        results: Array<DataProduct>
+        total_pages: number
+        current_page: number
+    }
+
     const [page, setPage] = useState(1);
-    const {data} = useSWR(`${URL_GET_PRODUCT_LIST}?page=${page}`, async (url) => {
-        const response = await axios.get(url)
+
+    const fetchProduct = async (url: string) => {
+        const response = await axios.get<Data>(url)
         return response.data
-    })
+    }
+
+    const {data} = useSWR(`${URL_GET_PRODUCT_LIST}?page=${page}`, fetchProduct)
 
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
