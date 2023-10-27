@@ -1,8 +1,9 @@
 import Content from "@/components/main/content";
+import ProductList from "@/components/main/content";
 function App() {
     return (
         <div>
-            <Content/>
+            <ProductList/>
         </div>
     );
 }

@@ -59,6 +59,15 @@
 }
 
 
+.rtl{
+    direction: rtl;
+}
+
+.ltr{
+    direction: ltr;
+}
+
+
 .thumbnail img {
     width: 100% !important;
     height: 100%;

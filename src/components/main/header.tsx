@@ -24,7 +24,7 @@ function Header() {
     };
 
 
-    const filteredProducts = data?.filter((product:DataProduct) =>
+    const filteredProducts = data?.results?.filter((product:DataProduct) =>
         product.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
 

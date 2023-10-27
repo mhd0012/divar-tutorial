@@ -24,7 +24,7 @@ const ListItem = ({product}:{product:DataProduct}) => {
                                 <div className="">
                                     {product.situation}
                                 </div>
-                                <div className="" style={{direction:'rtl'}}>
+                                <div className="rtl">
                                     {itpro(product.price)}
                                     <span> تومان </span>
                                 </div>
